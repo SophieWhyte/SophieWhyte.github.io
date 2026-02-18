@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Sophie Portfolio</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600&family=Fredoka:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+
+/* ---------------- COLORS ---------------- */
+
+:root{
+
+--white:#ffffff;
+
+--green1:#99d98c;
+--green2:#1db695;
+--green3:#b5e48c;
+--green4:#d9ed92;
+
+--blue1:#70cfff;
+--blue2:#b8e7ff;
+
+--purple1:#e7c7ff;
+--purple2:#f3e3ff;
+
+--pink1:#ff96d3;
+--pink2:#ffbfe4;
+
+--orange1:#ffb95e;
+--yellow1:#ffee9c;
+
+}
+
+/* ---------------- PAGE ---------------- */
+
+body{
+
+margin:0;
+height:100vh;
+
+display:flex;
+justify-content:center;
+align-items:center;
+
+background:
+linear-gradient(
+180deg,
+var(--blue2),
+var(--purple2),
+var(--pink2)
+);
+
+font-family:"Nunito",sans-serif;
+
+}
+
+/* ---------------- SYSTEM ---------------- */
+
+.folder-system{
+
+width:720px;
+max-width:95vw;
+
+}
+
+/* ---------------- TABS ---------------- */
+
+.tabs{
+
+display:flex;
+align-items:end;
+padding-left:20px;
+
+}
+
+/* individual tab */
+
+.tab{
+
+padding:12px 26px;
+
+border-radius:14px 14px 0 0;
+
+font-family:"Fredoka";
+font-weight:500;
+
+cursor:pointer;
+
+position:relative;
+
+margin-right:-12px;
+
+transition:.25s;
+
+box-shadow:
+0 4px 0 rgba(0,0,0,.08);
+
+}
+
+/* depth illusion */
+
+.tab:nth-child(1){ z-index:4; }
+.tab:nth-child(2){ z-index:3; }
+.tab:nth-child(3){ z-index:2; }
+.tab:nth-child(4){ z-index:1; }
+
+.tab:hover{
+
+transform:translateY(-6px);
+
+}
+
+/* active tab lifts */
+
+.tab.active{
+
+transform:translateY(-10px);
+
+box-shadow:
+0 8px 18px rgba(0,0,0,.18);
+
+}
+
+/* tab colours */
+
+.profile{
+background:linear-gradient(var(--pink1),var(--pink2));
+}
+
+.experience{
+background:linear-gradient(var(--purple1),var(--purple2));
+}
+
+.projects{
+background:linear-gradient(var(--blue1),var(--blue2));
+}
+
+.other{
+background:linear-gradient(var(--green3),var(--green4));
+}
+
+/* ---------------- FOLDER BODY ---------------- */
+
+.folder{
+
+background:var(--white);
+
+border-radius:22px;
+
+padding:40px;
+
+min-height:420px;
+
+position:relative;
+
+box-shadow:
+
+0 30px 60px rgba(0,0,0,.18),
+
+0 10px 20px rgba(0,0,0,.12),
+
+inset 0 0 0 3px rgba(255,255,255,.6);
+
+overflow:hidden;
+
+}
+
+/* decorative stacked layers */
+
+.layer{
+
+position:absolute;
+
+left:0;
+right:0;
+
+border-radius:22px;
+
+opacity:.85;
+
+}
+
+.layer.green{
+
+height:80%;
+bottom:-30px;
+
+background:
+linear-gradient(
+var(--green3),
+var(--green4)
+);
+
+}
+
+.layer.blue{
+
+height:65%;
+bottom:-10px;
+
+background:
+linear-gradient(
+var(--blue1),
+var(--blue2)
+);
+
+}
+
+.layer.purple{
+
+height:50%;
+bottom:10px;
+
+background:
+linear-gradient(
+var(--purple1),
+var(--purple2)
+);
+
+}
+
+.layer.pink{
+
+height:35%;
+bottom:30px;
+
+background:
+linear-gradient(
+var(--pink1),
+var(--pink2)
+);
+
+}
+
+.layer.orange{
+
+height:20%;
+bottom:50px;
+
+background:
+linear-gradient(
+var(--orange1),
+var(--yellow1)
+);
+
+}
+
+/* ---------------- CONTENT ---------------- */
+
+.content{
+
+position:relative;
+z-index:10;
+
+}
+
+/* panels */
+
+.panel{
+
+display:none;
+
+animation:fade .25s ease;
+
+}
+
+.panel.active{
+
+display:block;
+
+}
+
+@keyframes fade{
+
+from{
+
+opacity:0;
+transform:translateY(8px);
+
+}
+
+to{
+
+opacity:1;
+transform:translateY(0);
+
+}
+
+}
+
+/* text */
+
+h1{
+
+margin-top:0;
+
+font-family:"Fredoka";
+font-weight:600;
+
+}
+
+p{
+
+font-size:16px;
+
+}
+
+.project{
+
+background:rgba(255,255,255,.7);
+
+padding:12px;
+
+border-radius:12px;
+
+margin-bottom:10px;
+
+}
+
+/* cute sparkle */
+
+.sparkle{
+
+position:absolute;
+right:20px;
+top:20px;
+
+font-size:20px;
+
+opacity:.6;
+
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="folder-system">
+
+<div class="tabs">
+
+<div class="tab profile active"
+onclick="openTab('profile', this)">
+Profile
+</div>
+
+<div class="tab experience"
+onclick="openTab('experience', this)">
+Experience
+</div>
+
+<div class="tab projects"
+onclick="openTab('projects', this)">
+Projects
+</div>
+
+<div class="tab other"
+onclick="openTab('other', this)">
+Other
+</div>
+
+</div>
+
+<div class="folder">
+
+<div class="sparkle">✦</div>
+
+<!-- decorative layers -->
+
+<div class="layer green"></div>
+<div class="layer blue"></div>
+<div class="layer purple"></div>
+<div class="layer pink"></div>
+<div class="layer orange"></div>
+
+<div class="content">
+
+<div id="profile" class="panel active">
+
+<h1>Sophie ✦</h1>
+
+<p>
+Computer Science student who likes making cute colourful interfaces and playful web experiences.
+</p>
+
+<p>
+Interested in frontend, UI design, and creative coding.
+</p>
+
+</div>
+
+<div id="experience" class="panel">
+
+<h1>Experience</h1>
+
+<div class="project">
+Teaching Assistant – Object Oriented Programming
+</div>
+
+<div class="project">
+Spring Boot full stack systems
+</div>
+
+</div>
+
+<div id="projects" class="panel">
+
+<h1>Projects</h1>
+
+<div class="project">
+Hospital Management System
+</div>
+
+<div class="project">
+Course Management Android App
+</div>
+
+<div class="project">
+Gamified learning platform
+</div>
+
+</div>
+
+<div id="other" class="panel">
+
+<h1>Other</h1>
+
+<p>
+Creative coding ✦ UI experiments ✦ art + tech
+</p>
+
+</div>
+
+</div>
+</div>
+</div>
+
+<script>
+
+function openTab(id, tab){
+
+document.querySelectorAll(".panel")
+.forEach(panel => panel.classList.remove("active"));
+
+document.querySelectorAll(".tab")
+.forEach(tab => tab.classList.remove("active"));
+
+document.getElementById(id)
+.classList.add("active");
+
+tab.classList.add("active");
+
+}
+
+</script>
+
+</body>
+</html>
