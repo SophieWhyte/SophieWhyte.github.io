@@ -95,3 +95,11 @@ Contact items are currently rendered in `docs/script.js` inside `renderContact()
 2. In GitHub repo settings: Pages.
 3. Set source to `Deploy from a branch`.
 4. Select your branch and `/docs` folder.
+
+### TODO
+ - [ ] diff style switch
+ - [ ] certs & other experiences toggle on experience tab
+ - [ ] blog/ study notes
+ - [ ] other projects
+ - [ ] finish experience timeline properly
+ - [ ] finish about page properly
