@@ -225,47 +225,49 @@ function renderExperience() {
   const currentView = views.some((view) => view.key === experienceView)
     ? experienceView
     : "professional";
-  const filteredItems = items.filter(
-    (item) => (item.type || "professional") === currentView
-  );
+  const currentIndex = Math.max(0, views.findIndex((view) => view.key === currentView));
 
-  const timelineItems = filteredItems
-    .map((item) => {
-      const points = (item.points || [])
-        .map((point) => `<li>${point}</li>`)
-        .join("");
+  const getTimelineMarkup = (viewKey) => {
+    const filteredItems = items.filter((item) => (item.type || "professional") === viewKey);
+    const timelineItems = filteredItems
+      .map((item) => {
+        const points = (item.points || [])
+          .map((point) => `<li>${point}</li>`)
+          .join("");
 
-      return `
-        <article class="timeline-item">
-          <div class="timeline-year">${item.year || ""}</div>
-          <div class="timeline-card card-wrap">
-            <div class="card-layer layer-1"></div>
-            <div class="card-layer layer-2"></div>
-            <div class="card-layer layer-3"></div>
-            <div class="card p-3">
-              <h2 class="fs-4 mb-1">${item.role || ""}</h2>
-              <p class="timeline-company mb-2">${item.company || ""}</p>
-              <p class="mb-2">${item.summary || ""}</p>
-              <ul class="timeline-points mb-0">${points}</ul>
+        return `
+          <article class="timeline-item">
+            <div class="timeline-year">${item.year || ""}</div>
+            <div class="timeline-card card-wrap">
+              <div class="card-layer layer-1"></div>
+              <div class="card-layer layer-2"></div>
+              <div class="card-layer layer-3"></div>
+              <div class="card p-3">
+                <h2 class="fs-4 mb-1">${item.role || ""}</h2>
+                <p class="timeline-company mb-2">${item.company || ""}</p>
+                <p class="mb-2">${item.summary || ""}</p>
+                <ul class="timeline-points mb-0">${points}</ul>
+              </div>
             </div>
+          </article>
+        `;
+      })
+      .join("");
+
+    return (
+      timelineItems ||
+      `
+        <article class="timeline-empty card-wrap">
+          <div class="card-layer layer-1"></div>
+          <div class="card-layer layer-2"></div>
+          <div class="card-layer layer-3"></div>
+          <div class="card p-3">
+            <p class="mb-0">No entries yet for this section.</p>
           </div>
         </article>
-      `;
-    })
-    .join("");
-
-  const timelineContent =
-    timelineItems ||
-    `
-      <article class="timeline-empty card-wrap">
-        <div class="card-layer layer-1"></div>
-        <div class="card-layer layer-2"></div>
-        <div class="card-layer layer-3"></div>
-        <div class="card p-3">
-          <p class="mb-0">No entries yet for this section.</p>
-        </div>
-      </article>
-    `;
+      `
+    );
+  };
 
   const viewToggle = views
     .map(
@@ -288,17 +290,39 @@ function renderExperience() {
     <section>
       <h1>${title}</h1>
       <p>${subtitle}</p>
-      <div class="experience-toggle mt-3" role="radiogroup" aria-label="Experience view">
+      <div
+        class="experience-toggle mt-3"
+        role="radiogroup"
+        aria-label="Experience view"
+        style="--toggle-index:${currentIndex};"
+      >
+        <span class="experience-toggle-indicator" aria-hidden="true"></span>
         ${viewToggle}
       </div>
-      <div class="timeline mt-4">${timelineContent}</div>
+      <div class="timeline mt-4" data-experience-timeline>${getTimelineMarkup(currentView)}</div>
     </section>
   `;
 
+  const toggle = app.querySelector(".experience-toggle");
+  const timelineRoot = app.querySelector("[data-experience-timeline]");
+
   document.querySelectorAll("[data-experience-view]").forEach((input) => {
     input.addEventListener("change", () => {
-      experienceView = input.getAttribute("data-experience-view") || "professional";
-      renderExperience();
+      const nextView = input.getAttribute("data-experience-view") || "professional";
+      const nextIndex = Math.max(0, views.findIndex((view) => view.key === nextView));
+      experienceView = nextView;
+
+      if (toggle) {
+        toggle.style.setProperty("--toggle-index", String(nextIndex));
+      }
+
+      if (timelineRoot) {
+        timelineRoot.classList.remove("timeline-switch");
+        timelineRoot.innerHTML = getTimelineMarkup(nextView);
+        requestAnimationFrame(() => {
+          timelineRoot.classList.add("timeline-switch");
+        });
+      }
     });
   });
 }
