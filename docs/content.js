@@ -33,38 +33,22 @@ window.PORTFOLIO_DATA = {
     items: [
       {
         year: "2025",
-        role: "Senior Full Stack Developer",
-        company: "Northstar Labs",
+        role: "National End User Computing Engineer Associate",
+        company: "Metropolitan Police Service",
         summary:
-          "Led delivery of product features across frontend and backend, improving release speed and platform reliability.",
+          "TBD",
         points: [
-          "Owned end-to-end development of customer dashboard initiatives",
-          "Mentored 3 junior developers and introduced PR quality checklists",
-          "Reduced API response times by 35% through query and caching improvements",
+          "TBD",
         ],
       },
       {
         year: "2023",
-        role: "Full Stack Developer",
-        company: "Bright Pixel Studio",
+        role: "BSc Computer Science",
+        company: "University of Leicester",
         summary:
-          "Built client-facing web apps with a strong focus on usability, maintainability, and performance.",
+          "TBD",
         points: [
-          "Shipped 8+ production features across React and Node.js services",
-          "Partnered with design to launch a reusable UI component library",
-          "Integrated analytics dashboards used by product and marketing teams",
-        ],
-      },
-      {
-        year: "2021",
-        role: "Frontend Developer",
-        company: "Orbit Creative",
-        summary:
-          "Developed responsive interfaces and interactive components for agency and startup clients.",
-        points: [
-          "Implemented responsive design system across multiple client sites",
-          "Improved Lighthouse performance scores from mid-60s to 90+",
-          "Collaborated closely with backend teams to stabilize API integrations",
+          "TBD",
         ],
       },
     ],
