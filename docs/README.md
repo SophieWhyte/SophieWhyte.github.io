@@ -96,7 +96,7 @@ Contact items are currently rendered in `docs/script.js` inside `renderContact()
 3. Set source to `Deploy from a branch`.
 4. Select your branch and `/docs` folder.
 
-### TODO
+## TODO
  - [ ] diff style switch
  - [ ] certs & other experiences toggle on experience tab
  - [ ] blog/ study notes
