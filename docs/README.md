@@ -98,6 +98,7 @@ Contact items are currently rendered in `docs/script.js` inside `renderContact()
 
 ## TODO
  - [ ] diff style switch
+ - [ ] fix bg container
  - [ ] certs & other experiences toggle on experience tab
  - [ ] blog/ study notes
  - [ ] other projects
