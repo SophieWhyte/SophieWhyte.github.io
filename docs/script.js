@@ -12,6 +12,7 @@ const mobileTabs = document.getElementById("mobile-tabs");
 let currentPage = "about";
 let selectedProjectFilters = new Set();
 let showMoreProjectFilters = false;
+let experienceView = "professional";
 
 function renderTabs() {
   [desktopTabs, mobileTabs].forEach((root) => {
@@ -216,8 +217,19 @@ function renderExperience() {
   const title = experience.title || "Experience";
   const subtitle = experience.subtitle || "";
   const items = experience.items || [];
+  const views = [
+    { key: "professional", label: "Professional" },
+    { key: "certs", label: "Professional Certificates" },
+    { key: "practice", label: "Hands-On Practice" },
+  ];
+  const currentView = views.some((view) => view.key === experienceView)
+    ? experienceView
+    : "professional";
+  const filteredItems = items.filter(
+    (item) => (item.type || "professional") === currentView
+  );
 
-  const timelineItems = items
+  const timelineItems = filteredItems
     .map((item) => {
       const points = (item.points || [])
         .map((point) => `<li>${point}</li>`)
@@ -242,13 +254,53 @@ function renderExperience() {
     })
     .join("");
 
+  const timelineContent =
+    timelineItems ||
+    `
+      <article class="timeline-empty card-wrap">
+        <div class="card-layer layer-1"></div>
+        <div class="card-layer layer-2"></div>
+        <div class="card-layer layer-3"></div>
+        <div class="card p-3">
+          <p class="mb-0">No entries yet for this section.</p>
+        </div>
+      </article>
+    `;
+
+  const viewToggle = views
+    .map(
+      (view) => `
+        <label class="experience-toggle-item">
+          <input
+            type="radio"
+            name="experience-view"
+            value="${view.key}"
+            data-experience-view="${view.key}"
+            ${currentView === view.key ? "checked" : ""}
+          />
+          <span>${view.label}</span>
+        </label>
+      `
+    )
+    .join("");
+
   app.innerHTML = `
     <section>
       <h1>${title}</h1>
       <p>${subtitle}</p>
-      <div class="timeline mt-4">${timelineItems}</div>
+      <div class="experience-toggle mt-3" role="radiogroup" aria-label="Experience view">
+        ${viewToggle}
+      </div>
+      <div class="timeline mt-4">${timelineContent}</div>
     </section>
   `;
+
+  document.querySelectorAll("[data-experience-view]").forEach((input) => {
+    input.addEventListener("change", () => {
+      experienceView = input.getAttribute("data-experience-view") || "professional";
+      renderExperience();
+    });
+  });
 }
 
 function renderRoute() {

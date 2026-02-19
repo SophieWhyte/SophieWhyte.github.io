@@ -33,6 +33,7 @@ window.PORTFOLIO_DATA = {
     items: [
       {
         year: "2025",
+        type: "professional",
         role: "National End User Computing Engineer Associate",
         company: "Metropolitan Police Service",
         summary:
@@ -43,6 +44,7 @@ window.PORTFOLIO_DATA = {
       },
       {
         year: "2023",
+        type: "practice",
         role: "BSc Computer Science",
         company: "University of Leicester",
         summary:
