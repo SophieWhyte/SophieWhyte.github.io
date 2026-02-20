@@ -44,9 +44,19 @@ window.PORTFOLIO_DATA = {
       },
       {
         year: "2023",
-        type: "practice",
+        type: "professional",
         role: "BSc Computer Science",
         company: "University of Leicester",
+        summary:
+          "TBD",
+        points: [
+          "TBD",
+        ],
+      },
+      {
+        year: "2023",
+        type: "practice",
+        role: "TryHackMe",
         summary:
           "TBD",
         points: [
