@@ -54,11 +54,11 @@ window.PORTFOLIO_DATA = {
         ],
       },
       {
-        year: "2023",
+        year: "2026",
         type: "practice",
         role: "TryHackMe",
         summary:
-          "TBD",
+          "Self-Paced E-Learning Platform for CyberSec Fundamentals",
         points: [
           "TBD",
         ],
